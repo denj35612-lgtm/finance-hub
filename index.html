@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Finance Hub</title>
+    <!-- Offline Styling Matrix -->
+    <style>
+        body { background-color: #030712; color: #f3f4f6; font-family: sans-serif; margin: 0; min-height: 100vh; display: flex; flex-col: column; display: flex; flex-direction: column; justify-content: space-between; }
+        header { background-color: #111827; padding: 20px; border-bottom: 1px solid #1f2937; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .header-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; items-center: center; display: flex; align-items: center; }
+        h1 { margin: 0; font-size: 24px; color: #34d399; }
+        .badge { background-color: #1f2937; color: #9ca3af; font-size: 12px; padding: 4px 12px; rounded-radius: 9999px; border-radius: 9999px; font-family: monospace; }
+        main { max-width: 1100px; width: 100%; margin: 0 auto; padding: 24px; box-sizing: border-box; flex-grow: 1; }
+        .intro { text-align: center; margin: 20px 0 40px 0; }
+        .intro h2 { font-size: 32px; color: #ffffff; margin-bottom: 10px; }
+        .intro p { color: #9ca3af; max-width: 500px; margin: 0 auto; font-size: 14px; line-height: 1.5; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 30px; width: 100%; }
+        @media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr; } }
+        .card { background-color: #111827; padding: 30px; border-radius: 12px; border: 1px solid #1f2937; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+        .card h3 { margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #1f2937; font-size: 18px; }
+        .green-title { color: #34d399; }
+        .cyan-title { color: #22d3ee; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase; tracking-spacing: 0.05em; margin-bottom: 6px; letter-spacing: 1px; }
+        input { width: 100%; bg-color: #1f2937; background-color: #1f2937; border: 1px solid #374151; border-radius: 6px; padding: 10px; color: white; font-size: 14px; box-sizing: border-box; outline: none; transition: border 0.2s; }
+        input:focus { border-color: #34d399; }
+        .cyan-card input:focus { border-color: #22d3ee; }
+        button { width: 100%; border: none; padding: 12px; font-weight: bold; border-radius: 6px; font-size: 14px; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+        .green-btn { background-color: #34d399; color: #064e3b; }
+        .green-btn:hover { background-color: #059669; }
+        .cyan-btn { background-color: #22d3ee; color: #083344; }
+        .cyan-btn:hover { background-color: #0891b2; }
+        .result-section { margin-top: 24px; padding-top: 16px; border-top: 1px solid #1f2937; text-align: center; }
+        .result-label { font-size: 12px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; }
+        .result-val { font-size: 32px; font-weight: 900; margin: 4px 0 0 0; }
+        footer { background-color: #111827; text-align: center; padding: 24px; border-top: 1px solid #1f2937; font-size: 12px; color: #6b7280; }
+        .ad-box { margin-top: 12px; display: inline-block; background-color: #030712; padding: 12px 48px; border-radius: 4px; border: 1px dashed #374151; color: #4b5563; letter-spacing: 2px; text-transform: uppercase; font-size: 11px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>📈 SmartFinance Hub</h1>
+            <div class="badge">Offline-Ready Suite</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="intro">
+            <h2>Calculate Your Financial Future</h2>
+            <p>Free interactive web tools designed to simulate growth, analyze budgets, and track savings instantly.</p>
+        </div>
+        
+        <div class="grid">
+            
+            <!-- Tool 1 -->
+            <div class="card">
+                <h3 class="green-title">1. Compound Interest Calculator</h3>
+                <div class="form-group">
+                    <label>Starting Amount ($)</label>
+                    <input id="principal" type="number" value="1000">
+                </div>
+                <div class="form-group">
+                    <label>Monthly Deposit ($)</label>
+                    <input id="monthly" type="number" value="100">
+                </div>
+                <div class="form-group">
+                    <label>Annual Interest Rate (%)</label>
+                    <input id="rate" type="number" value="8">
+                </div>
+                <div class="form-group">
+                    <label>Years to Grow</label>
+                    <input id="years" type="number" value="10">
+                </div>
+                <button onclick="calculateInterest()" class="green-btn">Calculate Growth</button>
+                <div class="result-section">
+                    <div class="result-label">Estimated Total Value:</div>
+                    <div id="result-display" class="result-val green-title">$1,000.00</div>
+                </div>
+            </div>
+
+            <!-- Tool 2 -->
+            <div class="card cyan-card">
+                <h3 class="cyan-title">2. Simple Budget Tracker</h3>
+                <div class="form-group">
+                    <label>Total Monthly Income ($)</label>
+                    <input id="income" type="number" value="3000">
+                </div>
+                <div class="form-group">
+                    <label>Housing & Bills Expenses ($)</label>
+                    <input id="housing" type="number" value="1200">
+                </div>
+                <div class="form-group">
+                    <label>Food & Personal Expenses ($)</label>
+                    <input id="food" type="number" value="600">
+                </div>
+                <div class="form-group">
+                    <label>Other/Misc Expenses ($)</label>
+                    <input id="misc" type="number" value="300">
+                </div>
+                <button onclick="calculateBudget()" class="cyan-btn">Analyze Budget</button>
+                <div class="result-section">
+                    <div class="result-label">Remaining Monthly Savings:</div>
+                    <div id="budget-display" class="result-val cyan-title">$900.00</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SmartFinance Hub. All client-side code runs securely with zero data limits.</p>
+        <div class="ad-box">[ Google AdSense Display Unit ]</div>
+    </footer>
+
+    <script>
+        function calculateInterest() {
+            let principal = parseFloat(document.getElementById('principal').value) || 0;
+            let monthly = parseFloat(document.getElementById('monthly').value) || 0;
+            let rate = (parseFloat(document.getElementById('rate').value) || 0) / 100 / 12;
+            let years = parseInt(document.getElementById('years').value) || 0;
+            let months = years * 12;
+
+            let total = principal;
+            for (let i = 0; i < months; i++) {
+                total = total * (1 + rate) + monthly;
+            }
+            document.getElementById('result-display').innerText = '$' + total.toLocaleString('en-US', {maximumFractionDigits: 2});
+        }
+
+        function calculateBudget() {
+            let income = parseFloat(document.getElementById('income').value) || 0;
+            let housing = parseFloat(document.getElementById('housing').value) || 0;
+            let food = parseFloat(document.getElementById('food').value) || 0;
+            let misc = parseFloat(document.getElementById('misc').value) || 0;
+            
+            let savings = income - (housing + food + misc);
+            document.getElementById('budget-display').innerText = '$' + savings.toLocaleString('en-US', {maximumFractionDigits: 2});
+        }
+
+        calculateInterest();
+        calculateBudget();
+    </script>
+
+</body>
+</html>
